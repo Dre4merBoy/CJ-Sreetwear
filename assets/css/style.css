@@ -1,0 +1,1819 @@
+/* ============================================================
+   SALMAS · by CJ — Street Western
+   Hoja de estilos principal
+   ============================================================ */
+
+/* ---------- 1. VARIABLES DE MARCA ---------- */
+:root {
+  /* Paleta SALMAS */
+  --cherry-oscuro: #3a1d23;
+  --cherry-deep:   #2a141a;
+  --negro-lavado:  #1a1714;
+  --negro:         #0e0c0b;
+  --mocha:         #3a2e26;
+  --crema:         #e9e4d6;
+  --oatmeal:       #d4c9b8;
+  --texto-suave:   #b8ada0;
+
+  /* Tipografías */
+  --font-display: "Bebas Neue", "Oswald", "Arial Narrow", sans-serif;
+  --font-ui:      "Jost", "Segoe UI", sans-serif;
+  --font-elio:    "Montserrat", "Arial Black", sans-serif;
+
+  /* Paleta ELIO (sub-marca deportiva) */
+  --elio-black:   #000000;
+  --elio-charcoal:#1f1f1f;
+  --elio-steel:   #3a3a3a;
+  --elio-ash:     #a0a0a0;
+  --elio-bone:    #e8e6e1;
+
+  /* Espaciado / capas */
+  --header-h: 72px;
+  --z-header: 1000;
+
+  /* Velocidad global de animaciones (ajústala para acelerar/ralentizar) */
+  --reveal-speed: 0.6s;  /* faster scroll reveal for snappier feel */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- 2. RESET / BASE ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-ui);
+  font-weight: 300;
+  background: var(--negro);
+  color: var(--crema);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ---------- 3. UTILIDADES ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.95rem 2rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s ease-out, border-color 0.3s ease-out, color 0.3s ease-out,
+              transform 0.18s var(--ease-soft);
+  /* Área táctil cómoda en móvil */
+  min-height: 48px;
+}
+/* Feedback de press: el botón "escucha" al usuario (válido en todos los dispositivos) */
+.btn:active { transform: scale(0.97); }
+/* Lift sutil solo en dispositivos con hover real (evita falsos positivos en táctil) */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0) scale(0.97); }
+}
+
+.btn--solid {
+  background: var(--crema);
+  color: var(--negro);
+  border: 1px solid var(--crema);
+}
+.btn--solid:hover { background: transparent; color: var(--crema); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--crema);
+  border: 1px solid rgba(233, 228, 214, 0.35);
+}
+.btn--ghost:hover { border-color: var(--crema); background: rgba(233, 228, 214, 0.06); }
+
+/* Botón claro para la sección ELIO */
+.btn--light {
+  background: var(--elio-bone);
+  color: var(--elio-black);
+  border: 1px solid var(--elio-bone);
+  font-family: var(--font-elio);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+.btn--light:hover { background: transparent; color: var(--elio-bone); }
+
+/* ---------- 4. MARCA / LOGO CJ ---------- */
+.brand__mark {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+.brand__star {
+  font-size: 0.55em;
+  vertical-align: top;
+  position: relative;
+  top: -0.1em;
+  margin: 0 -0.05em;
+  color: var(--oatmeal);
+  /* inline-block: requisito para que transform/rotate aplique */
+  display: inline-block;
+  transform-origin: center;
+  /* Destello periódico y breve: casi siempre en reposo, brilla cada ciclo */
+  animation: starTwinkle 5.5s ease-in-out infinite;
+}
+@keyframes starTwinkle {
+  0%, 62%, 100% { transform: scale(1) rotate(0deg); opacity: 0.85; }
+  74%           { transform: scale(1.45) rotate(45deg); opacity: 1; }
+  86%           { transform: scale(1) rotate(90deg); opacity: 0.9; }
+}
+/* Giro rápido al pasar por el logo (refuerza la marca) */
+@media (hover: hover) and (pointer: fine) {
+  .brand:hover .brand__star { animation: starSpin 0.7s var(--ease-soft); }
+}
+@keyframes starSpin {
+  from { transform: scale(1) rotate(0deg); }
+  to   { transform: scale(1) rotate(180deg); }
+}
+
+/* ---------- 5. HEADER DINÁMICO ---------- */
+.header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: var(--header-h);
+  z-index: var(--z-header);
+  background: transparent;
+  transition: background 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft);
+}
+/* Clase añadida por JS al hacer scroll */
+.header.is-scrolled {
+  background: rgba(26, 23, 20, 0.92);          /* Negro Lavado sólido */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(233, 228, 214, 0.08);
+}
+
+.nav {
+  max-width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand { display: flex; align-items: baseline; gap: 0.7rem; }
+.brand__name {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  font-weight: 400;
+}
+
+.nav__links { display: flex; gap: 2.2rem; }
+.nav__links a {
+  position: relative;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  transition: color 0.3s ease;
+}
+.nav__links a:hover { color: var(--crema); }
+/* Underline que se dibuja desde la izquierda al entrar y se retira por la derecha al salir */
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 1px;
+  background: var(--crema);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-soft);
+}
+.nav__links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- BOTÓN HAMBURGUESA ---------- */
+.nav__toggle {
+  display: none;                 /* oculto en escritorio (se activa en móvil) */
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 48px;                   /* área táctil cómoda */
+  height: 48px;
+  padding: 12px 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: calc(var(--z-header) + 2);
+}
+.nav__toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--crema);
+  border-radius: 2px;
+  /* Transición suave para la transformación a "X" */
+  transition: transform 0.45s var(--ease-soft), opacity 0.35s var(--ease-soft);
+}
+/* Estado abierto: las barras forman una X */
+.nav__toggle.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav__toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav__toggle.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ---------- MENÚ MÓVIL (PANEL LATERAL) ---------- */
+/* Capa de fondo (backdrop): oscurece la página y cierra al tocar fuera */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-header) + 1);
+  background: rgba(10, 9, 8, 0);
+  /* Estado cerrado */
+  visibility: hidden;
+  transition: background 0.5s var(--ease-soft),
+              visibility 0s linear 0.5s;
+}
+/* Estado abierto: el backdrop se oscurece */
+.mobile-menu.is-open {
+  background: rgba(10, 9, 8, 0.6);
+  visibility: visible;
+  transition: background 0.5s var(--ease-soft), visibility 0s;
+}
+
+/* Panel que se desliza desde la derecha */
+.mobile-menu__panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: min(82%, 340px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 2rem 2.2rem;
+  /* Vidrio esmerilado: translúcido + desenfoque del fondo */
+  background: rgba(20, 17, 15, 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+          backdrop-filter: blur(20px) saturate(1.1);
+  border-left: 1px solid rgba(233, 228, 214, 0.12);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.45);
+  /* Fuera de pantalla (a la derecha). Cambia translateX(-100%) para que entre por la izquierda */
+  transform: translateX(100%);
+  transition: transform 0.5s var(--ease-soft);
+}
+.mobile-menu.is-open .mobile-menu__panel { transform: translateX(0); }
+
+.mobile-menu__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+.mobile-menu__links a {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  letter-spacing: 0.05em;
+  color: var(--crema);
+  /* Cada link entra escalonado (efecto cascada) */
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s var(--ease-soft), transform 0.5s var(--ease-soft);
+}
+/* Al abrir, revelamos los links uno tras otro */
+.mobile-menu.is-open .mobile-menu__links a { opacity: 1; transform: translateX(0); }
+.mobile-menu.is-open .mobile-menu__links li:nth-child(1) a { transition-delay: 0.18s; }
+.mobile-menu.is-open .mobile-menu__links li:nth-child(2) a { transition-delay: 0.25s; }
+.mobile-menu.is-open .mobile-menu__links li:nth-child(3) a { transition-delay: 0.32s; }
+.mobile-menu.is-open .mobile-menu__links li:nth-child(4) a { transition-delay: 0.39s; }
+
+.mobile-menu__cta {
+  align-self: flex-start;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s var(--ease-soft), transform 0.5s var(--ease-soft);
+}
+.mobile-menu.is-open .mobile-menu__cta {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.48s;
+}
+
+/* ---------- WHATSAPP: botones, ícono y botón flotante ---------- */
+.btn--whatsapp {
+  background: #25d366;
+  color: #0a3d1f;
+  border: 1px solid #25d366;
+  font-weight: 500;
+}
+.btn--whatsapp:hover { background: #1ebe5a; border-color: #1ebe5a; color: #06301a; }
+
+/* Ícono WhatsApp dibujado con máscara (hereda el color del texto) */
+.wa-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16.003 3C9.38 3 4 8.38 4 15c0 2.114.553 4.17 1.6 5.99L4 29l8.2-1.55A11.93 11.93 0 0 0 16.003 27C22.626 27 28 21.62 28 15S22.626 3 16.003 3zm0 21.8c-1.79 0-3.54-.48-5.07-1.39l-.36-.21-4.87.92.93-4.74-.24-.38A9.78 9.78 0 0 1 6.2 15c0-5.404 4.4-9.8 9.803-9.8 5.403 0 9.797 4.396 9.797 9.8s-4.394 9.8-9.797 9.8zm5.37-7.34c-.295-.147-1.745-.86-2.016-.96-.27-.098-.467-.147-.664.148-.196.295-.762.96-.934 1.156-.172.197-.344.222-.638.074-.295-.148-1.245-.459-2.372-1.463-.877-.782-1.47-1.748-1.642-2.043-.172-.295-.018-.454.13-.6.134-.133.295-.344.443-.516.148-.172.197-.295.295-.492.098-.197.05-.369-.025-.516-.074-.148-.664-1.6-.91-2.19-.24-.576-.484-.498-.664-.508l-.566-.01c-.197 0-.516.074-.787.369-.27.295-1.033 1.01-1.033 2.46 0 1.45 1.058 2.852 1.205 3.05.148.197 2.083 3.18 5.05 4.46.705.304 1.255.486 1.684.622.708.225 1.352.193 1.86.117.568-.085 1.745-.713 1.99-1.402.246-.689.246-1.279.172-1.402-.073-.123-.27-.197-.565-.344z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16.003 3C9.38 3 4 8.38 4 15c0 2.114.553 4.17 1.6 5.99L4 29l8.2-1.55A11.93 11.93 0 0 0 16.003 27C22.626 27 28 21.62 28 15S22.626 3 16.003 3zm0 21.8c-1.79 0-3.54-.48-5.07-1.39l-.36-.21-4.87.92.93-4.74-.24-.38A9.78 9.78 0 0 1 6.2 15c0-5.404 4.4-9.8 9.803-9.8 5.403 0 9.797 4.396 9.797 9.8s-4.394 9.8-9.797 9.8zm5.37-7.34c-.295-.147-1.745-.86-2.016-.96-.27-.098-.467-.147-.664.148-.196.295-.762.96-.934 1.156-.172.197-.344.222-.638.074-.295-.148-1.245-.459-2.372-1.463-.877-.782-1.47-1.748-1.642-2.043-.172-.295-.018-.454.13-.6.134-.133.295-.344.443-.516.148-.172.197-.295.295-.492.098-.197.05-.369-.025-.516-.074-.148-.664-1.6-.91-2.19-.24-.576-.484-.498-.664-.508l-.566-.01c-.197 0-.516.074-.787.369-.27.295-1.033 1.01-1.033 2.46 0 1.45 1.058 2.852 1.205 3.05.148.197 2.083 3.18 5.05 4.46.705.304 1.255.486 1.684.622.708.225 1.352.193 1.86.117.568-.085 1.745-.713 1.99-1.402.246-.689.246-1.279.172-1.402-.073-.123-.27-.197-.565-.344z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.wa-icon--lg { width: 30px; height: 30px; }
+
+/* Botón flotante fijo (esquina inferior derecha) */
+.wa-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 900;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
+  /* Pulso suave para llamar la atención */
+  animation: waFade 2.6s ease-in-out infinite;  /* subtle opacity instead of scale */
+}
+.wa-float:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+}
+@keyframes waFade {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+.footer__contact-text { color: var(--texto-suave); font-size: 0.95rem; max-width: 38ch; }
+
+/* ---------- AVISO FLOTANTE (toast) para el rate limiting ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  z-index: 1100;
+  transform: translate(-50%, 20px);
+  max-width: 90%;
+  padding: 0.9rem 1.4rem;
+  background: rgba(20, 17, 15, 0.96);
+  color: var(--crema);
+  border: 1px solid rgba(233, 228, 214, 0.18);
+  border-radius: 6px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  /* Oculto por defecto */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s var(--ease-soft), transform 0.35s var(--ease-soft), visibility 0s linear 0.35s;
+}
+.toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  transition: opacity 0.35s var(--ease-soft), transform 0.35s var(--ease-soft), visibility 0s;
+}
+
+/* ---------- 6. HERO ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--header-h) 1.5rem 4rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--negro-lavado) 0%, var(--negro) 100%);
+}
+
+/* Foto de fondo del hero (mockups Cherry) con velo oscuro para legibilidad */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../img/cherry-mockups.png") center/cover no-repeat;
+  opacity: 0.28;
+  filter: saturate(0.9);
+  /* Sutil zoom continuo para dar vida al fondo */
+  animation: heroDrift 24s ease-in-out infinite alternate;
+}
+/* Velo degradado encima de la foto */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(58, 29, 35, 0.45) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(14, 12, 11, 0.55) 0%, rgba(14, 12, 11, 0.9) 100%);
+}
+@keyframes heroDrift {
+  from { transform: scale(1); }
+  to   { transform: scale(1.12); }
+}
+
+.hero__inner { position: relative; z-index: 2; max-width: 820px; }
+.hero__scroll { z-index: 2; }
+
+/* ----------------------------------------------------------
+   Entrada refinada del hero: además del desplazamiento del
+   .reveal global, el texto entra desde un blur ligero. Esto
+   da el "momento landing" — el contenido se enfoca al cargar.
+   Se aplica al wrapper y a cada hijo para una cascada cohesiva.
+---------------------------------------------------------- */
+.hero .reveal {
+  filter: blur(10px);
+  transition: opacity var(--reveal-speed) var(--ease-soft),
+              transform var(--reveal-speed) var(--ease-soft),
+              filter var(--reveal-speed) var(--ease-soft);
+}
+.hero .reveal.is-visible { filter: blur(0); }
+
+/* ----------------------------------------------------------
+   6b. HERO DREAMER CLUB — editorial full-bleed
+   Imagen cinematográfica NÍTIDA (sin velo/atenuación), con la
+   información alineada a la izquierda al estilo lookbook moderno.
+---------------------------------------------------------- */
+.hero--dreamer {
+  justify-content: flex-start;            /* bloque anclado a la izquierda */
+  text-align: left;
+  padding-left: clamp(1.5rem, 6vw, 6rem);
+  padding-right: clamp(1.5rem, 6vw, 6rem);
+}
+/* Imagen a plena claridad — sin opacidad reducida ni desaturado */
+.hero--dreamer .hero__bg {
+  background-image: url("../img/dreamer-hero-cherry.png");
+  background-position: center right;
+  opacity: 1;
+  filter: none;
+}
+/* Scrim lateral SOLO para legibilidad (gradiente suave, NO blur) */
+.hero--dreamer::after {
+  background: linear-gradient(90deg,
+    rgba(10, 9, 8, 0.82) 0%,
+    rgba(10, 9, 8, 0.5) 28%,
+    rgba(10, 9, 8, 0.12) 55%,
+    transparent 75%);
+}
+.hero--dreamer .hero__inner { max-width: 600px; margin: 0; }
+
+.hero--dreamer .hero__eyebrow { color: var(--oatmeal); margin-bottom: 1.1rem; }
+
+/* Título poster grande */
+.hero--dreamer .hero__title {
+  font-size: clamp(3.5rem, 12vw, 7.5rem);
+  line-height: 0.84;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.4rem;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* Tagline */
+.hero__tagline {
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  line-height: 1.6;
+  margin-bottom: 2.4rem;
+}
+
+/* CTA tipo link subrayado con flecha que se desplaza en hover */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--crema);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--crema);
+  transition: gap 0.3s var(--ease-soft), color 0.3s ease, border-color 0.3s ease;
+}
+.hero__cta-arrow { transition: transform 0.3s var(--ease-soft); }
+@media (hover: hover) and (pointer: fine) {
+  .hero__cta:hover { gap: 0.9rem; }
+  .hero__cta:hover .hero__cta-arrow { transform: translateX(4px); }
+}
+
+/* --- DREAMER CLUB en móvil: enfoca la playera, scrim vertical --- */
+@media (max-width: 768px) {
+  .hero--dreamer { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hero--dreamer .hero__bg { background-position: center; }
+  .hero--dreamer::after {
+    background: linear-gradient(180deg,
+      rgba(10, 9, 8, 0.5) 0%,
+      rgba(10, 9, 8, 0.32) 38%,
+      rgba(10, 9, 8, 0.85) 100%);
+  }
+  .hero--dreamer .hero__inner { max-width: 100%; }
+}
+
+.hero__eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--oatmeal);
+  margin-bottom: 1.5rem;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  /* clamp evita que el título se corte en pantallas pequeñas */
+  font-size: clamp(4.5rem, 17vw, 8rem);
+  letter-spacing: 0.07em;
+  line-height: 0.9;
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+}
+
+.hero__subtitle {
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  color: var(--texto-suave);
+  max-width: 540px;
+  margin: 0 auto 2.5rem;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--texto-suave);
+}
+.hero__scroll-line {
+  width: 1px; height: 32px;
+  background: linear-gradient(var(--oatmeal), transparent);
+  transform-origin: top;        /* la línea se dibuja desde arriba hacia abajo */
+  animation: scrollPulse 2.2s var(--ease-soft) infinite;
+}
+@keyframes scrollPulse {
+  0%       { opacity: 0;   transform: scaleY(0.3); }
+  45%      { opacity: 1;   transform: scaleY(1); }
+  100%     { opacity: 0;   transform: scaleY(1); }
+}
+
+/* ---------- 7. ENCABEZADO DE SECCIÓN ---------- */
+.section-head { text-align: center; margin-bottom: 4rem; }
+.section-head__eyebrow {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--cherry-oscuro);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.section-head__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+/* ---------- 8. COLECCIONES (GRID) ---------- */
+.collections {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 7rem 2rem;
+}
+
+/* Columna única tipo editorial: cada colección es una fila banner */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* ---------- 9. TARJETA DE COLECCIÓN + HOVER PREMIUM ---------- */
+.card {
+  display: block;            /* es un <a>: lo forzamos a bloque */
+  position: relative;
+  min-height: 340px;
+  border: 1px solid transparent;   /* reservado para el accent en hover */
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  isolation: isolate;
+  transition: transform 0.35s ease-out, border-color 0.35s ease-out;
+}
+
+/* Imagen de fondo (recorte real de cada colección desde el board) */
+.card__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Zoom lento y premium (drift) — más largo que el lift para que la imagen
+     siga desplazándose después de que la tarjeta ya se asentó */
+  transition: transform 0.6s var(--ease-soft);
+}
+/* Una imagen por colección */
+.card--c1 .card__media { background-image: url("../img/col-01-dark-bloom.png"); }
+.card--c2 .card__media { background-image: url("../img/col-02-tokyo-dreams.png"); }
+.card--c3 .card__media { background-image: url("../img/col-03-broken-cherry.png"); }
+.card--c4 .card__media { background-image: url("../img/col-04-metal-heart.png"); }
+.card--c5 .card__media { background-image: url("../img/col-05-japandi-essence.png"); }
+.card--c6 .card__media { background-image: url("../img/elio-tops.png"); background-color: var(--elio-black); }
+
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* Velo lateral: oscurece la izquierda para que el texto se lea sobre la foto */
+  background: linear-gradient(90deg, rgba(14, 12, 11, 0.92) 0%, rgba(14, 12, 11, 0.55) 38%, rgba(14, 12, 11, 0.15) 70%, transparent 100%);
+  transition: opacity 0.6s var(--ease-soft);
+}
+
+.card__content {
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 560px;
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.card__index {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  color: var(--cherry-oscuro);
+  letter-spacing: 0.06em;
+  line-height: 0.9;
+  -webkit-text-stroke: 1px var(--oatmeal);
+}
+.card__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5.5vw, 3.4rem);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+}
+
+/* Descripción y enlace: ocultos hasta el hover */
+.card__desc,
+.card__link {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--ease-soft), transform 0.5s var(--ease-soft);
+}
+.card__desc {
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+  max-width: 36ch;
+}
+.card__link {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--crema);
+  margin-top: 0.4rem;
+  transition-delay: 0.05s;
+}
+
+/* --- Estados HOVER (efecto premium) --- */
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(233, 228, 214, 0.45);   /* accent crema en el borde */
+}
+.card:hover .card__overlay { opacity: 1; }
+/* La imagen hace zoom dentro del marco (overflow:hidden la recorta) */
+.card:hover .card__media { transform: scale(1.06); }
+.card:hover .card__desc,
+.card:hover .card__link {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Feedback de press: la tarjeta baja un poco al tocarla, confirmando el clic */
+.card:active {
+  transform: translateY(-2px) scale(0.995);
+  transition-duration: 0.12s;
+}
+
+/* ----------------------------------------------------------
+   8b. COLECCIONES — REDISEÑO EDITORIAL PREMIUM
+   Header compacto + grid con ritmo: dos "features" full-width
+   enmarcan dos pares. El producto es el protagonista: imágenes
+   grandes, poco velo, texto que acompaña (no compite).
+   Referencias: Represent, Fear of God, Rhude.
+---------------------------------------------------------- */
+.collections-intro {
+  max-width: 1280px;
+  margin: 0 auto;
+  /* Espacio para el header fijo + aire editorial generoso */
+  padding: calc(var(--header-h) + 5rem) 2rem 3.5rem;
+  text-align: center;
+}
+.collections-intro__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--oatmeal);
+  margin-bottom: 1.1rem;
+}
+.collections-intro__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  /* Reducido drásticamente vs. el hero anterior (era hasta 8rem) */
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--crema);
+  text-wrap: balance;
+}
+.collections-intro__lead {
+  margin: 1.2rem auto 0;
+  max-width: 46ch;
+  color: var(--texto-suave);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* Grid de 4 columnas: dos features full-width enmarcan una fila de 4 cards
+   compactas. Tamaño contenido y estético, sin perder el ritmo editorial. */
+.editorial {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem 7rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.4rem, 2.2vw, 2rem) clamp(0.9rem, 1.5vw, 1.3rem);
+}
+
+/* Tarjeta editorial: el enlace completo es el área táctil */
+.ec {
+  display: block;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.ec__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  aspect-ratio: 4 / 5;                 /* portrait premium */
+  background: var(--negro-lavado);
+  border: 1px solid rgba(233, 228, 214, 0.1);
+}
+.ec__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Poco velo: la prenda se ve. Zoom lento y elegante en hover */
+  filter: saturate(1) brightness(0.97);
+  transition: transform 0.7s var(--ease-soft), filter 0.7s var(--ease-soft);
+}
+
+/* Texto BAJO la imagen (lookbook): no oscurece la prenda */
+.ec__body { padding: 0.85rem 0.15rem 0; }
+.ec__row { display: flex; align-items: baseline; gap: 0.55rem; }
+.ec__index {
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  color: var(--oatmeal);
+}
+.ec__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--crema);
+}
+.ec__desc {
+  margin-top: 0.4rem;
+  color: var(--texto-suave);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  max-width: 32ch;
+}
+.ec__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--crema);
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(233, 228, 214, 0.4);
+  transition: gap 0.3s var(--ease-soft), border-color 0.3s ease;
+}
+.ec__cta-arrow { transition: transform 0.3s var(--ease-soft); }
+
+/* Feature full-width: banda cinematográfica (más baja que antes) */
+.ec--feature { grid-column: 1 / -1; }
+.ec--feature .ec__media { aspect-ratio: 16 / 6; }
+.ec--feature .ec__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* Velo lateral + inferior SUAVE solo para legibilidad; centro despejado */
+  background:
+    linear-gradient(90deg, rgba(10, 9, 8, 0.72) 0%, rgba(10, 9, 8, 0.3) 42%, transparent 72%),
+    linear-gradient(0deg, rgba(10, 9, 8, 0.5) 0%, transparent 38%);
+}
+.ec--feature .ec__body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  max-width: 540px;
+  padding: clamp(1.3rem, 3.5vw, 2.6rem);
+}
+.ec--feature .ec__name { font-size: clamp(1.9rem, 4.5vw, 3.2rem); }
+.ec--feature .ec__desc { color: rgba(233, 228, 214, 0.82); max-width: 42ch; }
+
+/* Hover elegante: zoom suave + CTA que respira */
+@media (hover: hover) and (pointer: fine) {
+  .ec:hover .ec__img { transform: scale(1.05); filter: saturate(1.06) brightness(1.02); }
+  .ec:hover .ec__cta { gap: 0.65rem; border-color: var(--crema); }
+  .ec:hover .ec__cta-arrow { transform: translateX(4px); }
+}
+.ec:active .ec__img { transform: scale(1.02); transition-duration: 0.2s; }
+
+/* Tablet: 2 columnas (la fila de 4 pasa a 2x2) · Móvil: 1 columna */
+@media (max-width: 980px) {
+  .editorial { grid-template-columns: repeat(2, 1fr); }
+  .ec--feature .ec__media { aspect-ratio: 16 / 9; }
+  .ec__name { font-size: clamp(1.2rem, 2.4vw, 1.6rem); }
+}
+@media (max-width: 560px) {
+  .editorial { grid-template-columns: 1fr; gap: 1.8rem; }
+  .ec--feature .ec__media { aspect-ratio: 1 / 1; }
+  .ec--feature .ec__name { font-size: clamp(2rem, 9vw, 2.8rem); }
+}
+
+/* Reduced motion: sin zoom de imagen */
+@media (prefers-reduced-motion: reduce) {
+  .ec__img { transition: none; }
+  .ec:hover .ec__img, .ec:active .ec__img { transform: none; }
+}
+
+/* ----------------------------------------------------------
+   PANTALLA DE CARGA — estrella del logo
+   Overlay full-screen que se muestra al abrir/navegar y se
+   oculta vía JS al cargar (el contenido vive debajo, no se gatea).
+---------------------------------------------------------- */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--negro);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s var(--ease-soft), visibility 0s linear 0s;
+}
+.page-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s var(--ease-soft), visibility 0s linear 0.5s;
+}
+.page-loader__star {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 3.6rem);
+  line-height: 1;
+  color: var(--oatmeal);
+  /* Giro + latido suave: la firma de la marca cargando */
+  animation: loaderStar 1.15s ease-in-out infinite;
+}
+@keyframes loaderStar {
+  0%   { transform: scale(0.7) rotate(0deg);    opacity: 0.35; }
+  50%  { transform: scale(1.2)  rotate(180deg); opacity: 1; }
+  100% { transform: scale(0.7) rotate(360deg); opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-loader__star { animation: none; opacity: 1; }
+}
+
+/* ----------------------------------------------------------
+   MODAL — ÚNETE AL DREAMER CLUB (captación / newsletter)
+   Aparece una vez por sesión al entrar al home. Paleta cherry.
+---------------------------------------------------------- */
+.club-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease-soft), visibility 0s linear 0.4s;
+}
+.club-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s var(--ease-soft);
+}
+.club-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 9, 8, 0.82);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+.club-modal__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(92vw, 880px);
+  max-height: 92vh;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--negro-lavado);
+  border: 1px solid rgba(233, 228, 214, 0.12);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  /* Entrada */
+  transform: translateY(16px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.5s var(--ease-soft), opacity 0.5s var(--ease-soft);
+}
+.club-modal.is-open .club-modal__panel { transform: none; opacity: 1; }
+
+.club-modal__media { flex: 0 0 44%; position: relative; background: var(--negro); }
+.club-modal__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.club-modal__content {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  background: linear-gradient(160deg, var(--cherry-oscuro) 0%, var(--negro-lavado) 72%);
+  overflow-y: auto;
+  position: relative;
+}
+.club-modal__close {
+  position: absolute;
+  top: 0.8rem; right: 0.9rem;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none; cursor: pointer;
+  color: var(--texto-suave); font-size: 1.05rem;
+  transition: color 0.25s ease, transform 0.3s var(--ease-soft);
+}
+.club-modal__close:hover { color: var(--crema); transform: rotate(90deg); }
+
+.club-modal__eyebrow {
+  font-size: 0.64rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--oatmeal); margin-bottom: 0.7rem;
+}
+.club-modal__mark {
+  display: inline-block; font-family: var(--font-display);
+  font-size: 1.05rem; letter-spacing: 0.12em; color: var(--crema);
+  margin-bottom: 1.1rem;
+}
+.club-modal__title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(2.1rem, 4.5vw, 3rem); line-height: 0.95;
+  letter-spacing: 0.03em; color: var(--crema); margin-bottom: 0.9rem;
+}
+.club-modal__text {
+  color: var(--texto-suave); font-size: 0.92rem; line-height: 1.55;
+  max-width: 42ch; margin-bottom: 1.4rem;
+}
+.club-modal__text b { color: var(--crema); font-weight: 500; }
+
+/* Chips de interés */
+.club-form__choices { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.club-chip {
+  position: relative;
+  display: inline-flex; align-items: center;
+  padding: 0.45rem 0.95rem; border-radius: 100px; cursor: pointer;
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--texto-suave);
+  border: 1px solid rgba(233, 228, 214, 0.22);
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+.club-chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+.club-chip:has(input:checked) {
+  color: var(--negro); background: var(--crema); border-color: var(--crema);
+}
+
+/* Email */
+.club-form__email {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(233, 228, 214, 0.06);
+  border: 1px solid rgba(233, 228, 214, 0.2);
+  border-radius: 4px;
+  color: var(--crema);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.club-form__email::placeholder { color: var(--texto-suave); }
+.club-form__email:focus {
+  outline: none;
+  border-color: var(--crema);
+  background: rgba(233, 228, 214, 0.1);
+}
+
+/* Consentimiento */
+.club-form__consent {
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  font-size: 0.76rem; line-height: 1.45; color: var(--texto-suave);
+  margin-bottom: 1rem; cursor: pointer;
+}
+.club-form__consent input {
+  margin-top: 0.15rem; flex: 0 0 auto; width: 16px; height: 16px;
+  accent-color: var(--cherry-oscuro);
+}
+.club-form__pp { color: var(--crema); text-decoration: underline; text-underline-offset: 2px; }
+
+.club-form__error { color: #e69ca0; font-size: 0.78rem; margin-bottom: 0.8rem; }
+.club-form__submit { width: 100%; }
+
+.club-modal__skip {
+  margin-top: 1rem; text-align: center; cursor: pointer;
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--texto-suave); transition: color 0.25s ease;
+}
+.club-modal__skip:hover { color: var(--crema); }
+
+/* Estado de éxito */
+.club-modal__success-star {
+  display: inline-block; font-family: var(--font-display);
+  font-size: 2.4rem; color: var(--oatmeal); margin-bottom: 0.5rem;
+  animation: starTwinkle 5.5s ease-in-out infinite;
+}
+.club-modal__success .btn--whatsapp { margin-top: 0.4rem; }
+
+/* Móvil: apila (imagen como banda superior) */
+@media (max-width: 720px) {
+  .club-modal__panel { flex-direction: column; max-height: 88vh; }
+  .club-modal__media { flex: 0 0 140px; }
+  .club-modal__content { padding: 1.5rem 1.4rem 1.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .club-modal__panel { transition: opacity 0.3s ease; transform: none; }
+  .club-modal__success-star { animation: none; }
+}
+
+/* ----------------------------------------------------------
+   9b. SHOWCASE — carrusel/marquee de productos (presentación)
+   Banda continua que se desliza sola en loop sin costuras.
+   Movimiento constante → easing linear. Pausa en hover.
+---------------------------------------------------------- */
+.showcase {
+  padding: 7rem 0 6rem;
+  background: var(--negro);
+  overflow: hidden;
+  border-top: 1px solid rgba(233, 228, 214, 0.08);
+}
+.showcase .section-head {
+  margin-bottom: 5rem;
+  padding: 0 2rem;
+}
+
+/* Contenedor con fade en los bordes + perspective para 3D */
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  perspective: 1200px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+/* Pista: dos sets idénticos; al trasladar -50% el set 2 cae justo donde
+   empezaba el set 1 → loop perfecto. Usamos margin-right (no gap). */
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
+  will-change: transform;
+  gap: 1rem;
+}
+@keyframes marqueeScroll {
+  to { transform: translateX(-50%); }
+}
+
+/* Card con diseño moderno: portrait aspect ratio, overlays, efectos 3D */
+.marquee__item {
+  flex: 0 0 auto;
+  position: relative;
+  width: clamp(180px, 20vw, 280px);
+  height: clamp(260px, 32vw, 420px);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(233, 228, 214, 0.15);
+  transition: transform 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
+  /* baseline: sin lifr, con sombra sutil */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(233, 228, 214, 0.1);
+  /* Stagger animation en carga (se llena desde JS) */
+  animation: itemReveal 0.6s var(--ease-soft) backwards;
+}
+
+@keyframes itemReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.marquee__item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1) brightness(0.92);
+  /* El parallax/scale se aplica inline desde JS; el reposo vuelve suave */
+  transition: transform 0.5s var(--ease-soft), filter 0.5s var(--ease-soft);
+  transform-origin: center;
+  z-index: 1;
+}
+
+/* Overlay: gradiente cinematográfico para legibilidad de labels */
+.marquee__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg,
+    rgba(10, 9, 8, 0) 0%,
+    rgba(10, 9, 8, 0.1) 45%,
+    rgba(10, 9, 8, 0.65) 78%,
+    rgba(10, 9, 8, 0.92) 100%);
+  transition: opacity 0.45s var(--ease-soft);
+  opacity: 1;
+}
+
+/* Glare: brillo radial que sigue al cursor (se posiciona vía --mx/--my en JS) */
+.marquee__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+    rgba(233, 228, 214, 0.16) 0%, transparent 42%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-soft);
+}
+
+/* Label de colección: jerarquía tipográfica (número + nombre + CTA) */
+.marquee__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 1.1rem 1.2rem;
+  transition: transform 0.45s var(--ease-soft);
+  transform: translateY(6px);
+}
+.marquee__num {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.4vw, 2rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  color: var(--oatmeal);
+  -webkit-text-stroke: 0.5px rgba(58, 29, 35, 0.9);
+}
+.marquee__name {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--crema);
+  line-height: 1;
+}
+.marquee__cta {
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-top: 0.35rem;
+  /* Oculto por defecto; se revela en hover */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s var(--ease-soft), transform 0.4s var(--ease-soft);
+}
+
+/* Hover: glare on, glow, label asciende, CTA aparece */
+@media (hover: hover) and (pointer: fine) {
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+
+  /* El tilt 3D (rotateX/rotateY) lo aplica JS inline; aquí solo el resto */
+  .marquee__item:hover {
+    border-color: rgba(233, 228, 214, 0.4);
+    box-shadow: 0 28px 56px rgba(58, 29, 35, 0.65), inset 0 1px 0 rgba(233, 228, 214, 0.22);
+  }
+  .marquee__item:hover::after { opacity: 1; }
+
+  .marquee__item:hover img {
+    filter: saturate(1.3) brightness(1.05);
+  }
+
+  .marquee__item:hover .marquee__label { transform: translateY(0); }
+  .marquee__item:hover .marquee__overlay { opacity: 0.92; }
+
+  .marquee__item:hover .marquee__cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile: sin 3D ni parallax; el CTA siempre visible (no hay hover real) */
+@media (max-width: 768px) {
+  .marquee { perspective: none; }
+  .marquee__label { transform: translateY(0); }
+  .marquee__cta { opacity: 0.7; transform: translateY(0); }
+}
+
+/* Reduced motion: sin auto-scroll; se puede deslizar a mano */
+@media (prefers-reduced-motion: reduce) {
+  .marquee { overflow-x: auto; perspective: none; }
+  .marquee__track { animation: none; }
+  .marquee__item { animation: none; opacity: 1; transform: none; }
+  .marquee__item::after { display: none; }
+}
+
+/* ---------- 10. FILOSOFÍA ---------- */
+.philosophy {
+  text-align: center;
+  padding: 9rem 2rem;
+  /* Paleta de la foto de home: cherry profundo casi negro + brillo carmesí
+     del atardecer subiendo desde la base. Cinematográfico, no plano. */
+  background:
+    radial-gradient(120% 75% at 50% 118%, rgba(150, 36, 40, 0.28) 0%, transparent 58%),
+    radial-gradient(120% 100% at 50% 0%, rgba(58, 29, 35, 0.55) 0%, transparent 60%),
+    linear-gradient(180deg, #150b0e 0%, var(--cherry-oscuro) 46%, #120a0c 100%);
+  border-top: 1px solid rgba(233, 228, 214, 0.08);
+  border-bottom: 1px solid rgba(233, 228, 214, 0.08);
+}
+.philosophy__inner { max-width: 720px; margin: 0 auto; }
+
+/* Wrapper: maneja el reveal; el logo dentro flota en loop sutil */
+.philosophy__logo-wrap { display: inline-block; margin: 0 auto 1.75rem; }
+.philosophy__logo {
+  width: 220px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  /* Flotación continua y suave: da vida sin distraer (Emil: oscilante → ease-in-out) */
+  animation: logoFloat 6s ease-in-out infinite;
+}
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* Eyebrow: ancla narrativa del bloque de lore */
+.philosophy__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--oatmeal);
+  margin-bottom: 1.1rem;
+}
+
+.philosophy__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 1.08;   /* aire para diacríticos (Ó, ñ) en Bebas all-caps */
+  letter-spacing: 0.03em;
+  margin: 0 0 2rem;
+  text-wrap: balance;
+}
+/* Transparencia de crema, no gris muerto: contraste sobre cherry */
+.philosophy__text {
+  color: rgba(233, 228, 214, 0.82);
+  font-size: 1.05rem;
+  max-width: 58ch;
+  margin: 0 auto;
+  text-wrap: pretty;
+}
+.philosophy__text + .philosophy__text { margin-top: 1.3rem; }
+
+/* Firma: la divisa de marca, con línea de acento que la corona */
+.philosophy__signature {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2.1rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--oatmeal);
+  margin-top: 2.8rem;
+}
+.philosophy__signature::before {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 1px;
+  margin: 0 auto 1.4rem;
+  background: rgba(233, 228, 214, 0.4);
+  /* La línea se dibuja al revelarse el bloque */
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.7s var(--ease-soft) 0.2s;
+}
+.philosophy__signature.is-visible::before { transform: scaleX(1); }
+
+/* ============================================================
+   10b. SUB-MARCA ELIO (estética deportiva, monocromática)
+   ============================================================ */
+.elio {
+  background: var(--elio-black);
+  color: var(--elio-bone);
+  padding: 7rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.elio__head { max-width: 760px; margin: 0 auto 3.5rem; text-align: center; }
+.elio__eyebrow {
+  font-family: var(--font-elio);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--elio-ash);
+  margin-bottom: 1.2rem;
+}
+.elio__logo {
+  font-family: var(--font-elio);
+  font-weight: 800;
+  font-size: clamp(3.5rem, 16vw, 8rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--elio-bone);
+}
+.elio__tagline {
+  font-family: var(--font-elio);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--elio-bone);
+  margin: 0.8rem 0 1.5rem;
+}
+.elio__text { color: var(--elio-ash); font-size: 1.02rem; }
+
+/* Bandas de imagen (producto + lifestyle) */
+.elio__product,
+.elio__lifestyle {
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.elio__product { margin-bottom: 3.5rem; }
+.elio__lifestyle { margin: 3.5rem auto 0; max-width: 1280px; }
+.elio__product img,
+.elio__lifestyle img { width: 100%; display: block; }
+
+/* Tecnologías: cuadrícula de 4 */
+.elio__tech {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.elio__tech li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: var(--elio-charcoal);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  transition: transform 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
+}
+.elio__tech li:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.2); }
+.elio__tech-title {
+  font-family: var(--font-elio);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.elio__tech-desc { font-size: 0.85rem; color: var(--elio-ash); line-height: 1.5; }
+
+.elio__cta { text-align: center; margin-top: 3.5rem; }
+
+/* ============================================================
+   10c. PÁGINA DE COLECCIÓN (coleccion.html)
+   ============================================================ */
+.col-hero {
+  position: relative;
+  min-height: 62vh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--header-h) + 3rem) 2rem 3.5rem;
+  overflow: hidden;
+}
+/* Banner de la colección (se asigna por JS) */
+.col-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+}
+.col-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(14,12,11,0.55) 0%, rgba(14,12,11,0.6) 50%, rgba(14,12,11,0.95) 100%);
+}
+.col-hero__inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; width: 100%; }
+.col-hero__index {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  color: var(--oatmeal);
+  margin-bottom: 0.5rem;
+}
+.col-hero__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 9vw, 5.5rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.col-hero__desc {
+  color: var(--texto-suave);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  max-width: 560px;
+  margin: 1.2rem 0 1.5rem;
+}
+.col-hero__back {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--crema);
+  border-bottom: 1px solid rgba(233, 228, 214, 0.3);
+  padding-bottom: 3px;
+  transition: border-color 0.2s ease-out;
+}
+.col-hero__back:hover { border-color: var(--crema); }
+
+/* Hero para la página de ELIO */
+.elio-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--header-h) + 3rem) 2rem 3.5rem;
+  background: var(--elio-black);
+  color: var(--elio-bone);
+  text-align: center;
+  overflow: hidden;
+}
+.elio-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+.elio-hero__eyebrow {
+  font-family: var(--font-elio);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--elio-ash);
+  margin-bottom: 1rem;
+}
+.elio-hero__title {
+  font-family: var(--font-elio);
+  font-size: clamp(3rem, 12vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.elio-hero__tagline {
+  font-family: var(--font-elio);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--elio-bone);
+  margin-bottom: 1.5rem;
+}
+.elio-hero__desc {
+  color: var(--elio-ash);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.prod-section { max-width: 1280px; margin: 0 auto; padding: 5rem 2rem 7rem; }
+
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+
+/* Tarjeta de prenda */
+.prod {
+  background: var(--negro-lavado);
+  border: 1px solid rgba(233, 228, 214, 0.06);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
+}
+.prod:hover { transform: translateY(-6px); border-color: rgba(233, 228, 214, 0.18); }
+
+.prod__media {
+  aspect-ratio: 4 / 5;
+  background: #161311;
+  overflow: hidden;
+}
+.prod__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-soft);
+}
+.prod:hover .prod__media img { transform: scale(1.05); }
+
+.prod__body { padding: 1.4rem 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+.prod__name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+}
+.prod__specs { display: flex; flex-direction: column; gap: 0.4rem; }
+.prod__specs li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.82rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(233, 228, 214, 0.06);
+}
+.prod__specs span { color: var(--texto-suave); letter-spacing: 0.05em; }
+.prod__specs b { color: var(--crema); font-weight: 400; text-align: right; }
+
+.prod__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.4rem;
+}
+.prod__price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--crema);
+}
+.prod__buy { padding: 0.7rem 1.2rem; font-size: 0.72rem; }
+
+/* ---------- 11. FOOTER ---------- */
+.footer {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--negro);
+  border-top: 1px solid rgba(233, 228, 214, 0.08);
+}
+.footer__inner { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
+.footer__mark { font-size: 2.2rem; }
+.footer__tagline {
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+.footer__legal { font-size: 0.7rem; letter-spacing: 0.2em; color: #6b635a; margin-top: 1rem; }
+
+/* ============================================================
+   12. ANIMACIONES DE SCROLL REVEAL (clases base)
+   El estado inicial es invisible y desplazado; JS añade .is-visible
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--reveal-speed) var(--ease-soft),
+              transform var(--reveal-speed) var(--ease-soft);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respeta a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero .reveal { filter: none; }
+  .hero__bg { animation: none; }
+  .hero__scroll-line { animation: none; }
+  .philosophy__logo { animation: none; }
+  .philosophy__signature::before { transition: none; transform: scaleX(1); }
+  .brand__star { animation: none; }
+  .wa-float { animation: none; }
+  .btn:hover, .btn:active { transform: none; }
+  .card:hover, .card:active { transform: none; }
+  .card:hover .card__media { transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   13. MEDIA QUERIES — RESPONSIVIDAD
+   ============================================================ */
+
+/* --- Tablet --- */
+@media (max-width: 1024px) {
+  .collections { padding: 5rem 1.5rem; }
+  .nav__links { gap: 1.6rem; }
+  .elio__tech { grid-template-columns: repeat(2, 1fr); }
+  .prod-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Móvil (< 768px) --- */
+@media (max-width: 768px) {
+  /* Grid de colecciones: una sola columna a 100% */
+  .grid { grid-template-columns: 1fr; gap: 1.25rem; }
+
+  /* En móvil: imagen arriba (prendas visibles) y texto anclado abajo */
+  .card { min-height: 340px; }
+  .card__media { background-position: center 30%; }   /* enfoca las prendas */
+  .card__content {
+    max-width: 100%;
+    height: auto;
+    top: auto;
+    bottom: 0;
+    justify-content: flex-end;   /* texto pegado abajo */
+    padding: 1.6rem;
+  }
+
+  /* En móvil mostramos la descripción siempre (no hay hover táctil fiable) */
+  .card__desc,
+  .card__link { opacity: 1; transform: none; }
+  /* Velo de abajo hacia arriba: prendas limpias arriba, texto legible abajo */
+  .card__overlay {
+    background: linear-gradient(180deg, transparent 30%, rgba(14,12,11,0.6) 60%, rgba(14,12,11,0.95) 100%);
+  }
+
+  /* Header: ocultamos links y CTA; mostramos hamburguesa */
+  .nav { padding: 0 1.25rem; }
+  .nav__links { display: none; }
+  .nav__cta { display: none; }
+  .nav__toggle { display: flex; }
+
+  /* Hero más compacto y sin desbordes */
+  .hero { padding-top: calc(var(--header-h) + 1rem); }
+  .hero__actions { flex-direction: column; width: 100%; }
+  .hero__actions .btn { width: 100%; }
+
+  .philosophy { padding: 6rem 1.5rem; }
+  .footer { padding: 4rem 1.5rem; }
+
+  /* ELIO en móvil */
+  .elio { padding: 5rem 1.5rem; }
+  .elio__tech { grid-template-columns: 1fr; gap: 1rem; }
+
+  /* Página de colección en móvil */
+  .prod-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .prod-section { padding: 3.5rem 1.5rem 5rem; }
+  .col-hero { min-height: 52vh; padding: calc(var(--header-h) + 2rem) 1.5rem 2.5rem; }
+}
+
+/* --- Móvil pequeño (< 420px) --- */
+@media (max-width: 420px) {
+  .brand__name { display: none; }      /* dejamos solo el monograma CJ */
+  .hero__title { letter-spacing: 0.06em; }
+  .card__content { padding: 1.5rem; }
+}
+
+/* ============================================================
+   13. PÁGINA LEGAL (privacidad.html) — texto largo legible
+   Columna angosta, jerarquía tipográfica sobria sobre negro.
+   ============================================================ */
+.legal {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: calc(var(--header-h) + 4rem) 2rem 6rem;
+}
+.legal__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--oatmeal);
+  margin-bottom: 1rem;
+}
+.legal__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--crema);
+  margin-bottom: 0.8rem;
+}
+.legal__updated {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(233, 228, 214, 0.1);
+}
+.legal__section { margin-bottom: 2.6rem; }
+.legal__section h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  letter-spacing: 0.04em;
+  color: var(--crema);
+  margin-bottom: 0.9rem;
+}
+.legal__section p,
+.legal__section li {
+  color: rgba(233, 228, 214, 0.78);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+.legal__section p + p { margin-top: 0.9rem; }
+.legal__section ul {
+  list-style: none;
+  margin-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.legal__section li { position: relative; padding-left: 1.4rem; }
+.legal__section li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-size: 0.7em;
+  color: var(--oatmeal);
+}
+.legal__section a { color: var(--crema); text-decoration: underline; text-underline-offset: 2px; }
+.legal__section b { color: var(--crema); font-weight: 500; }
+.legal__back {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--crema);
+  border-bottom: 1px solid rgba(233, 228, 214, 0.3);
+  padding-bottom: 3px;
+  transition: border-color 0.2s ease-out;
+}
+.legal__back:hover { border-color: var(--crema); }
+
+@media (max-width: 560px) {
+  .legal { padding: calc(var(--header-h) + 2.5rem) 1.5rem 4rem; }
+}

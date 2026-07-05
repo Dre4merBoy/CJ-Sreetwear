@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Las colecciones DREAMER by CJ — Street Western Premium. Dreamer Club, Dreamer West, Dreamer Vision, Broken Cherry, Tokyo Dreams y Dark Bloom." />
+  <title>Colecciones · DREAMER by CJ</title>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Pantalla de carga: estrella del logo (se oculta al cargar) -->
+  <div class="page-loader" id="pageLoader" role="status" aria-label="Cargando">
+    <span class="page-loader__star" aria-hidden="true">✦</span>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a href="../index.html" class="brand" aria-label="DREAMER by CJ">
+        <span class="brand__mark">C<span class="brand__star">✦</span>J</span>
+        <span class="brand__name">DREAMER</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="colecciones.html">Colecciones</a></li>
+        <li><a href="../index.html#filosofia">Filosofía</a></li>
+        <li><a href="elio.html">ELIO</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+
+      <a href="colecciones.html" class="btn btn--ghost nav__cta">Ver Drop</a>
+
+      <!-- Botón hamburguesa (solo móvil) -->
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú"
+              aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MENÚ MÓVIL ============ -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__panel">
+      <ul class="mobile-menu__links">
+        <li><a href="colecciones.html">Colecciones</a></li>
+        <li><a href="../index.html#filosofia">Filosofía</a></li>
+        <li><a href="elio.html">ELIO</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn btn--whatsapp mobile-menu__cta js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Escríbenos
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ INTRO EDITORIAL (header compacto) ============ -->
+  <section class="collections-intro">
+    <p class="collections-intro__eyebrow reveal" data-delay="80">The Collections</p>
+    <h1 class="collections-intro__title reveal" data-delay="160">Six Visions. One Identity.</h1>
+    <p class="collections-intro__lead reveal" data-delay="280">
+      Del desierto al sakura: seis mundos bajo una sola firma CJ.
+    </p>
+  </section>
+
+  <!-- ============ GRID EDITORIAL ============ -->
+  <section class="editorial" id="colecciones" aria-label="Colecciones">
+
+    <!-- 01 · DREAMER CLUB (feature full-width) -->
+    <a href="coleccion.html?c=dreamer-club" class="ec ec--feature reveal">
+      <div class="ec__media">
+        <img class="ec__img" src="../assets/img/dream.png"
+             alt="Dreamer Club: playera negra sobre una roca en el desierto al atardecer" loading="lazy" />
+        <div class="ec__overlay"></div>
+        <div class="ec__body">
+          <div class="ec__row"><span class="ec__index">01</span><h2 class="ec__name">Dreamer Club</h2></div>
+          <p class="ec__desc">El origen. La pieza que define el movimiento.</p>
+          <span class="ec__cta">Explore Collection <span class="ec__cta-arrow" aria-hidden="true">→</span></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 02 · DREAMER WEST -->
+    <a href="coleccion.html?c=dreamer-west" class="ec reveal" data-delay="80">
+      <div class="ec__media">
+        <img class="ec__img" src="../assets/img/col-04-metal-heart.png" alt="Dreamer West" loading="lazy" />
+      </div>
+      <div class="ec__body">
+        <div class="ec__row"><span class="ec__index">02</span><h2 class="ec__name">Dreamer West</h2></div>
+        <p class="ec__desc">Desierto, polvo y actitud. El oeste reinterpretado.</p>
+        <span class="ec__cta">Explore Collection <span class="ec__cta-arrow" aria-hidden="true">→</span></span>
+      </div>
+    </a>
+
+    <!-- 03 · DREAMER VISION -->
+    <a href="coleccion.html?c=dreamer-vision" class="ec reveal" data-delay="160">
+      <div class="ec__media">
+        <img class="ec__img" src="../assets/img/col-05-japandi-essence.png" alt="Dreamer Vision" loading="lazy" />
+      </div>
+      <div class="ec__body">
+        <div class="ec__row"><span class="ec__index">03</span><h2 class="ec__name">Dreamer Vision</h2></div>
+        <p class="ec__desc">Calma y claridad. Lo esencial, depurado.</p>
+        <span class="ec__cta">Explore Collection <span class="ec__cta-arrow" aria-hidden="true">→</span></span>
+      </div>
+    </a>
+
+    <!-- 04 · BROKEN CHERRY -->
+    <a href="coleccion.html?c=broken-cherry" class="ec reveal" data-delay="80">
+      <div class="ec__media">
+        <img class="ec__img" src="../assets/img/col-03-broken-cherry.png" alt="Broken Cherry" loading="lazy" />
+      </div>
+      <div class="ec__body">
+        <div class="ec__row"><span class="ec__index">04</span><h2 class="ec__name">Broken Cherry</h2></div>
+        <p class="ec__desc">Sakura fragmentada. Belleza que se rompe para florecer.</p>
+        <span class="ec__cta">Explore Collection <span class="ec__cta-arrow" aria-hidden="true">→</span></span>
+      </div>
+    </a>
+
+    <!-- 05 · TOKYO DREAMS -->
+    <a href="coleccion.html?c=tokyo-dreams" class="ec reveal" data-delay="160">
+      <div class="ec__media">
+        <img class="ec__img" src="../assets/img/col-02-tokyo-dreams.png" alt="Tokyo Dreams" loading="lazy" />
+      </div>
+      <div class="ec__body">
+        <div class="ec__row"><span class="ec__index">05</span><h2 class="ec__name">Tokyo Dreams</h2></div>
+        <p class="ec__desc">Serenidad japandi en crema y mocha.</p>
+        <span class="ec__cta">Explore Collection <span class="ec__cta-arrow" aria-hidden="true">→</span></span>
+      </div>
+    </a>
+
+    <!-- 06 · DARK BLOOM (feature full-width) -->
+    <a href="coleccion.html?c=dark-bloom" class="ec ec--feature reveal">
+      <div class="ec__media">
+        <img class="ec__img" src="../assets/img/col-01-dark-bloom.png" alt="Dark Bloom" loading="lazy" />
+        <div class="ec__overlay"></div>
+        <div class="ec__body">
+          <div class="ec__row"><span class="ec__index">06</span><h2 class="ec__name">Dark Bloom</h2></div>
+          <p class="ec__desc">Lo gótico hecho prenda. Rosas sobre Cherry Oscuro.</p>
+          <span class="ec__cta">Explore Collection <span class="ec__cta-arrow" aria-hidden="true">→</span></span>
+        </div>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- ============ FOOTER / CONTACTO ============ -->
+  <footer class="footer" id="contacto">
+    <div class="footer__inner reveal">
+      <span class="brand__mark footer__mark">C<span class="brand__star">✦</span>J</span>
+      <p class="footer__tagline">SALMAS · STREET WESTERN · BUILT DIFFERENT</p>
+      <p class="footer__contact-text">¿Te interesa una pieza? Escríbenos directo por WhatsApp.</p>
+      <a class="btn btn--whatsapp js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Contáctanos por WhatsApp
+      </a>
+      <p class="footer__legal">CJ © 2026 · All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============ BOTÓN FLOTANTE WHATSAPP ============ -->
+  <a class="wa-float js-wa" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <span class="wa-icon wa-icon--lg" aria-hidden="true"></span>
+  </a>
+
+  <script src="../config.js"></script>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

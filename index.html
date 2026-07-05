@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SALMAS by CJ — Street Western. Colecciones inspiradas en la fusión de lo oscuro y lo etéreo, donde el rock, el metal y la estética japandi se encuentran." />
+  <title>SALMAS · by CJ — Street Western</title>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Pantalla de carga: estrella del logo (se oculta al cargar) -->
+  <div class="page-loader" id="pageLoader" role="status" aria-label="Cargando">
+    <span class="page-loader__star" aria-hidden="true">✦</span>
+  </div>
+
+  <!-- ============ HEADER DINÁMICO ============ -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a href="#hero" class="brand" aria-label="DREAMER by CJ">
+        <span class="brand__mark">C<span class="brand__star">✦</span>J</span>
+        <span class="brand__name">DREAMER</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="pages/colecciones.html">Colecciones</a></li>
+        <li><a href="#filosofia">Filosofía</a></li>
+        <li><a href="pages/elio.html">ELIO</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <a href="pages/colecciones.html" class="btn btn--ghost nav__cta">Ver Drop</a>
+
+      <!-- Botón hamburguesa (solo móvil) -->
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú"
+              aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MENÚ MÓVIL (panel lateral) ============ -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__panel">
+      <ul class="mobile-menu__links">
+        <li><a href="pages/colecciones.html">Colecciones</a></li>
+        <li><a href="#filosofia">Filosofía</a></li>
+        <li><a href="pages/elio.html">ELIO</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn btn--whatsapp mobile-menu__cta js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Escríbenos
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ HERO (editorial full-bleed · DREAMER CLUB) ============ -->
+  <section class="hero hero--dreamer" id="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__inner reveal">
+      <p class="hero__eyebrow reveal" data-delay="100">Street Western Redefined</p>
+      <h1 class="hero__title reveal" data-delay="200">Dreamer<br />Club</h1>
+      <p class="hero__tagline reveal" data-delay="350">
+        We don't follow paths.<br />We build our own.
+      </p>
+      <a href="pages/colecciones.html" class="hero__cta reveal" data-delay="500">
+        Shop Now <span class="hero__cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="hero__scroll-line"></span>
+    </div>
+  </section>
+
+<!-- ============ SHOWCASE / CARRUSEL DE PRODUCTOS ============ -->
+  <section class="showcase reveal" aria-label="Algunos de nuestros productos">
+    <header class="section-head">
+      <p class="section-head__eyebrow">El Drop</p>
+      <h2 class="section-head__title">Piezas que hablan por sí solas</h2>
+    </header>
+
+    <!-- Banda continua (marquee). Dos sets idénticos = loop sin costuras.
+         Es decorativa (aria-hidden); las versiones accesibles y enlazables
+         viven en la página de colecciones. -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <!-- set 1 -->
+        <div class="marquee__item" data-index="01" data-name="Dark Bloom">
+          <img src="assets/img/col-01-dark-bloom.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">01</span>
+            <span class="marquee__name">Dark Bloom</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="02" data-name="Tokyo Dreams">
+          <img src="assets/img/col-02-tokyo-dreams.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">02</span>
+            <span class="marquee__name">Tokyo Dreams</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="03" data-name="Broken Cherry">
+          <img src="assets/img/col-03-broken-cherry.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">03</span>
+            <span class="marquee__name">Broken Cherry</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="04" data-name="Metal Heart">
+          <img src="assets/img/col-04-metal-heart.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">04</span>
+            <span class="marquee__name">Metal Heart</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="05" data-name="Japandi Essence">
+          <img src="assets/img/col-05-japandi-essence.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">05</span>
+            <span class="marquee__name">Japandi Essence</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="06" data-name="ELIO">
+          <img src="assets/img/elio-tops.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">06</span>
+            <span class="marquee__name">ELIO</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <!-- set 2 (duplicado exacto para el loop) -->
+        <div class="marquee__item" data-index="01" data-name="Dark Bloom">
+          <img src="assets/img/col-01-dark-bloom.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">01</span>
+            <span class="marquee__name">Dark Bloom</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="02" data-name="Tokyo Dreams">
+          <img src="assets/img/col-02-tokyo-dreams.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">02</span>
+            <span class="marquee__name">Tokyo Dreams</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="03" data-name="Broken Cherry">
+          <img src="assets/img/col-03-broken-cherry.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">03</span>
+            <span class="marquee__name">Broken Cherry</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="04" data-name="Metal Heart">
+          <img src="assets/img/col-04-metal-heart.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">04</span>
+            <span class="marquee__name">Metal Heart</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="05" data-name="Japandi Essence">
+          <img src="assets/img/col-05-japandi-essence.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">05</span>
+            <span class="marquee__name">Japandi Essence</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+        <div class="marquee__item" data-index="06" data-name="ELIO">
+          <img src="assets/img/elio-tops.png" alt="" loading="lazy" />
+          <div class="marquee__overlay"></div>
+          <div class="marquee__label">
+            <span class="marquee__num">06</span>
+            <span class="marquee__name">ELIO</span>
+            <span class="marquee__cta">Ver colección →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FILOSOFÍA / LORE DE MARCA ============ -->
+  <section class="philosophy" id="filosofia">
+    <div class="philosophy__inner">
+      <div class="philosophy__logo-wrap reveal">
+        <img class="philosophy__logo" src="assets/img/logo-mark.png" alt="Logo CJ — Street Western" loading="lazy" />
+      </div>
+      <p class="philosophy__eyebrow reveal" data-delay="120">El origen</p>
+      <h2 class="philosophy__title reveal" data-delay="220">Inspirado en la tradición.<br />Diseñado para el futuro.</h2>
+      <p class="philosophy__text reveal" data-delay="360">
+        SALMAS nació de una obsesión: traer de vuelta la actitud cruda de los
+        2000. La estética del metal, el filo del skate y la nostalgia de una
+        época que no pedía permiso para existir.
+      </p>
+      <p class="philosophy__text reveal" data-delay="500">
+        Cada prenda cruza dos mundos: la herencia oscura del rock y la calma del
+        minimalismo oriental. No seguimos tendencias, reescribimos las que
+        valían la pena.
+      </p>
+      <p class="philosophy__signature reveal" data-delay="640">Street Western. Built Different.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER / CONTACTO ============ -->
+  <footer class="footer" id="contacto">
+    <div class="footer__inner reveal">
+      <span class="brand__mark footer__mark">C<span class="brand__star">✦</span>J</span>
+      <p class="footer__tagline">SALMAS · STREET WESTERN · BUILT DIFFERENT</p>
+      <p class="footer__contact-text">¿Te interesa una pieza? Escríbenos directo por WhatsApp.</p>
+      <a class="btn btn--whatsapp js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Contáctanos por WhatsApp
+      </a>
+      <p class="footer__legal">CJ © 2026 · All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============ BOTÓN FLOTANTE WHATSAPP ============ -->
+  <a class="wa-float js-wa" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <span class="wa-icon wa-icon--lg" aria-hidden="true"></span>
+  </a>
+
+  <!-- ============ MODAL: ÚNETE AL DREAMER CLUB ============ -->
+  <div class="club-modal" id="clubModal" aria-hidden="true">
+    <div class="club-modal__backdrop" data-close></div>
+    <div class="club-modal__panel" role="dialog" aria-modal="true" aria-labelledby="clubModalTitle">
+      <button class="club-modal__close" type="button" aria-label="Cerrar" data-close>✕</button>
+
+      <div class="club-modal__media" aria-hidden="true">
+        <img src="assets/img/Modelo salma.png" alt="" loading="lazy" />
+      </div>
+
+      <div class="club-modal__content">
+        <p class="club-modal__eyebrow">Street Western · Built Different</p>
+        <span class="club-modal__mark" aria-hidden="true">C<span class="brand__star">✦</span>J DREAMER</span>
+
+        <div class="club-modal__join" id="clubJoin">
+          <h2 class="club-modal__title" id="clubModalTitle">Únete al<br />Dreamer Club</h2>
+          <p class="club-modal__text">
+            Suscríbete y obtén <b>10% de descuento</b> en tu primer pedido.
+            Sé el primero en cada drop, restock y lanzamiento de SALMAS y ELIO.
+          </p>
+
+          <form class="club-form" id="clubForm" novalidate>
+            <div class="club-form__choices" role="radiogroup" aria-label="¿Qué te interesa?">
+              <label class="club-chip"><input type="radio" name="interes" value="salmas" checked /> SALMAS</label>
+              <label class="club-chip"><input type="radio" name="interes" value="elio" /> ELIO</label>
+              <label class="club-chip"><input type="radio" name="interes" value="ambos" /> Ambos</label>
+            </div>
+
+            <input class="club-form__email" id="clubEmail" type="email" inputmode="email"
+                   placeholder="Tu correo" autocomplete="email" required />
+
+            <label class="club-form__consent">
+              <input type="checkbox" id="clubConsent" required />
+              <span>He leído la <a class="club-form__pp" href="pages/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> y acepto recibir novedades y promociones de CJ.</span>
+            </label>
+
+            <p class="club-form__error" id="clubError" role="alert" hidden></p>
+
+            <button class="btn btn--solid club-form__submit" type="submit">Unirme al Club</button>
+          </form>
+
+          <p class="club-modal__skip" data-close>No, gracias</p>
+        </div>
+
+        <div class="club-modal__success" id="clubSuccess" hidden>
+          <span class="club-modal__success-star" aria-hidden="true">✦</span>
+          <h2 class="club-modal__title">Ya eres parte<br />del Club</h2>
+          <p class="club-modal__text">
+            Te avisaremos de cada drop. Reclama tu <b>10%</b> ahora mismo por WhatsApp.
+          </p>
+          <a class="btn btn--whatsapp js-wa" target="_blank" rel="noopener"
+             data-msg="Hola DREAMER 👋, me uní al Dreamer Club y quiero mi 10% de descuento en mi primer pedido.">
+            <span class="wa-icon" aria-hidden="true"></span> Reclamar 10% por WhatsApp
+          </a>
+          <p class="club-modal__skip" data-close>Cerrar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- config.js lo genera el servidor con la config pública (ver server.js) -->
+  <script src="config.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

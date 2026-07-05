@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Colección SALMAS by CJ — prendas y especificaciones." />
+  <title>SALMAS · Colección</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Pantalla de carga: estrella del logo (se oculta al cargar) -->
+  <div class="page-loader" id="pageLoader" role="status" aria-label="Cargando">
+    <span class="page-loader__star" aria-hidden="true">✦</span>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header is-scrolled" id="header">
+    <nav class="nav">
+      <a href="../index.html" class="brand" aria-label="DREAMER by CJ">
+        <span class="brand__mark">C<span class="brand__star">✦</span>J</span>
+        <span class="brand__name">DREAMER</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="colecciones.html">Colecciones</a></li>
+        <li><a href="../index.html#filosofia">Filosofía</a></li>
+        <li><a href="elio.html">ELIO</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+
+      <a href="../index.html" class="btn btn--ghost nav__cta">← Inicio</a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú"
+              aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MENÚ MÓVIL (panel lateral) ============ -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__panel">
+      <ul class="mobile-menu__links">
+        <li><a href="colecciones.html">Colecciones</a></li>
+        <li><a href="../index.html#filosofia">Filosofía</a></li>
+        <li><a href="elio.html">ELIO</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn btn--whatsapp mobile-menu__cta js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Escríbenos
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ HERO DE COLECCIÓN ============ -->
+  <section class="col-hero">
+    <div class="col-hero__bg" id="colBanner" aria-hidden="true"></div>
+    <div class="col-hero__inner reveal">
+      <p class="col-hero__index" id="colIndice">00</p>
+      <h1 class="col-hero__title" id="colNombre">Colección</h1>
+      <p class="col-hero__desc" id="colDesc"></p>
+      <a href="colecciones.html" class="col-hero__back">← Todas las colecciones</a>
+    </div>
+  </section>
+
+  <!-- ============ CUADRÍCULA DE PRENDAS ============ -->
+  <section class="prod-section">
+    <header class="section-head reveal">
+      <p class="section-head__eyebrow">Las Prendas</p>
+      <h2 class="section-head__title">Detalle &amp; especificaciones</h2>
+    </header>
+
+    <!-- Las tarjetas se generan dinámicamente desde coleccion.js -->
+    <div class="prod-grid" id="prodGrid"></div>
+  </section>
+
+  <!-- ============ FOOTER / CONTACTO ============ -->
+  <footer class="footer" id="contacto">
+    <div class="footer__inner reveal">
+      <span class="brand__mark footer__mark">C<span class="brand__star">✦</span>J</span>
+      <p class="footer__tagline">SALMAS · STREET WESTERN · BUILT DIFFERENT</p>
+      <p class="footer__contact-text">¿Te interesa una pieza? Escríbenos directo por WhatsApp.</p>
+      <a class="btn btn--whatsapp js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Contáctanos por WhatsApp
+      </a>
+      <p class="footer__legal">CJ © 2026 · All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============ BOTÓN FLOTANTE WHATSAPP ============ -->
+  <a class="wa-float js-wa" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <span class="wa-icon wa-icon--lg" aria-hidden="true"></span>
+  </a>
+
+  <!-- config.js lo genera el servidor con la config pública (ver server.js) -->
+  <script src="../config.js"></script>
+  <!-- coleccion.js renderiza las prendas ANTES de que script.js active las animaciones -->
+  <script src="../assets/js/coleccion.js"></script>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

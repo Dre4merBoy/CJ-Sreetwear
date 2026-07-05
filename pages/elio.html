@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ELIO by CJ — Performance Division. Ropa deportiva diseñada para el rendimiento y el estilo." />
+  <title>ELIO · Performance Division</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Pantalla de carga: estrella del logo (se oculta al cargar) -->
+  <div class="page-loader" id="pageLoader" role="status" aria-label="Cargando">
+    <span class="page-loader__star" aria-hidden="true">✦</span>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header is-scrolled" id="header">
+    <nav class="nav">
+      <a href="../index.html" class="brand" aria-label="DREAMER by CJ">
+        <span class="brand__mark">C<span class="brand__star">✦</span>J</span>
+        <span class="brand__name">DREAMER</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="colecciones.html">Colecciones</a></li>
+        <li><a href="../index.html#filosofia">Filosofía</a></li>
+        <li><a href="elio.html">ELIO</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+
+      <a href="../index.html" class="btn btn--ghost nav__cta">← Inicio</a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú"
+              aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MENÚ MÓVIL (panel lateral) ============ -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__panel">
+      <ul class="mobile-menu__links">
+        <li><a href="colecciones.html">Colecciones</a></li>
+        <li><a href="../index.html#filosofia">Filosofía</a></li>
+        <li><a href="elio.html">ELIO</a></li>
+        <li><a href="../index.html#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn btn--whatsapp mobile-menu__cta js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Escríbenos
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ HERO DE ELIO ============ -->
+  <section class="elio-hero reveal">
+    <div class="elio-hero__inner">
+      <p class="elio-hero__eyebrow">CJ presenta · Performance Division</p>
+      <h1 class="elio-hero__title">ELIO</h1>
+      <p class="elio-hero__tagline">Built to Perform.</p>
+      <p class="elio-hero__desc">
+        Ropa deportiva diseñada para el rendimiento y el estilo. Cada pieza
+        está creada para moverse contigo, superar tus límites y reflejar tu disciplina.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ SUB-MARCA: ELIO (con estilos adaptados) ============ -->
+  <section class="elio">
+
+    <!-- Banda de producto (línea de tops) -->
+    <div class="elio__product reveal">
+      <img src="../assets/img/elio-tops.png" alt="Línea de tops ELIO — performance tee, tank, long sleeve, oversize" loading="lazy" />
+    </div>
+
+    <!-- Tecnologías -->
+    <ul class="elio__tech reveal">
+      <li><span class="elio__tech-title">Dry Tech</span><span class="elio__tech-desc">Absorbe el sudor y mantiene tu cuerpo seco.</span></li>
+      <li><span class="elio__tech-title">4-Way Stretch</span><span class="elio__tech-desc">Máxima elasticidad para mayor movilidad.</span></li>
+      <li><span class="elio__tech-title">Breathable</span><span class="elio__tech-desc">Tejidos con ventilación continua.</span></li>
+      <li><span class="elio__tech-title">Lightweight</span><span class="elio__tech-desc">Ligero para un rendimiento sin distracciones.</span></li>
+    </ul>
+
+    <!-- Banda lifestyle a todo lo ancho -->
+    <div class="elio__lifestyle reveal">
+      <img src="../assets/img/elio-lifestyle.png" alt="ELIO — Built to Perform. Designed to Inspire." loading="lazy" />
+    </div>
+
+    <div class="elio__cta reveal">
+      <a href="../index.html#contacto" class="btn btn--light">Contáctanos para Ordenar</a>
+    </div>
+
+  </section>
+
+  <!-- ============ FOOTER / CONTACTO ============ -->
+  <footer class="footer" id="contacto">
+    <div class="footer__inner reveal">
+      <span class="brand__mark footer__mark">C<span class="brand__star">✦</span>J</span>
+      <p class="footer__tagline">SALMAS · STREET WESTERN · BUILT DIFFERENT</p>
+      <p class="footer__contact-text">¿Te interesa una pieza? Escríbenos directo por WhatsApp.</p>
+      <a class="btn btn--whatsapp js-wa" target="_blank" rel="noopener">
+        <span class="wa-icon" aria-hidden="true"></span> Contáctanos por WhatsApp
+      </a>
+      <p class="footer__legal">CJ © 2026 · All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============ BOTÓN FLOTANTE WHATSAPP ============ -->
+  <a class="wa-float js-wa" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <span class="wa-icon wa-icon--lg" aria-hidden="true"></span>
+  </a>
+
+  <!-- config.js lo genera el servidor con la config pública (ver server.js) -->
+  <script src="../config.js"></script>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

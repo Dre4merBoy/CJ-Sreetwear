@@ -1,0 +1,44 @@
+# ============================================================
+# SALMAS · by CJ — Archivos que NO se suben al repositorio
+# ============================================================
+
+# Dependencias
+node_modules/
+
+# 🔒 Variables de entorno con SECRETOS REALES — nunca subir
+.env
+.env.local
+.env.*.local
+
+# (Sí se sube .env.example, que es solo la plantilla sin secretos)
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Claude Code
+.agents/
+.claude/
+skills-lock.json
+
+# 📄 Documentos internos — no publicar en el repo
+SECURITY_FIXES.md
+SECURITY_SUMMARY.txt
+SECURITY_BEST_PRACTICES.md
+PRODUCT.md
+DESIGN.md
+
+# Fuentes de diseño internas (moodboards, bocetos) — no van al sitio en vivo
+design-source/
